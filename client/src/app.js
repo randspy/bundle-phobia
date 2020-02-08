@@ -9,7 +9,7 @@ class App extends React.Component {
       .then(res => console.log(res));
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.callAPI();
   }
 
