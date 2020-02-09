@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import SelectPackage from './select-package';
 import ReactSelect from 'react-select';
 

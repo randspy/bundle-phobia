@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search should render correctly 1`] = `
+<div
+  className="search"
+>
+  <div>
+    <div
+      className="search--separation"
+    >
+      <strong>
+        bundle
+      </strong>
+       phobia
+    </div>
+    <div
+      className="search--separation"
+    >
+      find the cost of adding a npm package to your bundle
+    </div>
+    <div>
+      <SelectPackage
+        onChange={[Function]}
+        onSelect={[Function]}
+        options={Array []}
+      />
+    </div>
+  </div>
+</div>
+`;

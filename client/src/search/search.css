@@ -1,0 +1,14 @@
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.search--title {
+  display: flex;
+}
+
+.search--separation {
+  margin-bottom: 20px;
+}
