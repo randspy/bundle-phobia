@@ -1,5 +1,10 @@
+:root {
+  --primary-color: black;
+  --secondary-color: grey;
+}
+
 * {
-    color: black;
-  }
-  
-  
+  color: var(--primary-color);
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 2px;
+}

@@ -37,10 +37,10 @@ export default function Search() {
   return (
     <div className="search">
       <div>
-        <div className="search--separation">
-          <strong>bundle</strong> phobia
+        <div className="search--title">
+          BUNDLE<div className="search--secondary-title">PHOBIA</div>
         </div>
-        <div className="search--separation">
+        <div className="search--subtitle">
           find the cost of adding a npm package to your bundle
         </div>
         <div>

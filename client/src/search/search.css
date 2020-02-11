@@ -6,9 +6,19 @@
 }
 
 .search--title {
+  font-size: 20px;
+  font-weight: 700px;
   display: flex;
 }
 
-.search--separation {
+.search--secondary-title {
+  color: var(--secondary-color);
+}
+
+.search--subtitle {
+  font-family: 'Source Code Pro', monospace;
+}
+.search--subtitle,
+.search--title {
   margin-bottom: 20px;
 }
