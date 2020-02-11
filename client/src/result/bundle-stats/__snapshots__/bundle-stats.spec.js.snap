@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BundleStats should render correctly 1`] = `
+<div
+  className="bundle-stats"
+>
+  <div
+    className="bundle-stats--label bundle-stats--center"
+  >
+    BUNDLE SIZE
+  </div>
+  <div
+    className="bundle-stats--size"
+  >
+    <div
+      className="bundle-stats--group"
+    >
+      <div
+        className="bundle-stats--minified"
+      >
+        <div
+          className="bundle-stats--number"
+        >
+          99
+        </div>
+        <div
+          className="bundle-stats--unit"
+        >
+          kB
+        </div>
+      </div>
+      <div
+        className="bundle-stats--center"
+      >
+        Minified
+      </div>
+    </div>
+    <div
+      className="bundle-stats--group"
+    >
+      <div
+        className="bundle-stats--gzip"
+      >
+        <div
+          className="bundle-stats--number"
+        >
+          88
+        </div>
+        <div
+          className="bundle-stats--unit"
+        >
+          kB
+        </div>
+      </div>
+      <div
+        className="bundle-stats--center"
+      >
+        Minified + Gzipped
+      </div>
+    </div>
+  </div>
+</div>
+`;

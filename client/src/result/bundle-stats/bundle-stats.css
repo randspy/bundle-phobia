@@ -1,0 +1,44 @@
+.bundle-stats--label {
+  letter-spacing: 2px;
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--secondary-color);
+  margin-bottom: 20px;
+}
+
+.bundle-stats--size {
+  display: flex;
+}
+
+.bundle-stats--group {
+  display: flex;
+  flex-direction: column;
+}
+
+.bundle-stats--minified,
+.bundle-stats--gzip {
+  font-size: 20px;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.bundle-stats--minified {
+  margin-right: 20px;
+}
+
+.bundle-stats--unit {
+  color: var(--secondary-color);
+  font-size: 38px;
+  font-weight: 700;
+  padding-bottom: 4px;
+}
+
+.bundle-stats--number {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.bundle-stats--center {
+  text-align: center;
+}
