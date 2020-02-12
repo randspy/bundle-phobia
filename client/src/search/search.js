@@ -30,8 +30,7 @@ export default function Search() {
   }
 
   if (query) {
-    const url = `/result?p=${query.name}@${query.version}`;
-    return <Redirect to={url} />;
+    return redirectToResultPage(query);
   }
 
   return (
@@ -53,4 +52,9 @@ export default function Search() {
       </div>
     </div>
   );
+}
+
+function redirectToResultPage(query) {
+  const url = `/result?name=${query.name}&version=${query.version}`;
+  return <Redirect to={url} />;
 }

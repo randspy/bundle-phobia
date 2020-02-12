@@ -43,7 +43,9 @@ describe('Search', () => {
     const dataFromOnChange = { name: 'react', version: '16.2.1' };
     const wrapper = shallow(<Search />);
     wrapper.find(SelectPackage).prop('onSelect')(dataFromOnChange);
-    expect(wrapper.find(Redirect).props().to).toEqual('/result?p=react@16.2.1');
+    expect(wrapper.find(Redirect).props().to).toEqual(
+      '/result?name=react&version=16.2.1'
+    );
   });
 
   it('should render correctly', () => {

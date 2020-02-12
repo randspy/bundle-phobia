@@ -11,10 +11,12 @@ afterEach(() => {
 describe('fetchPackages', () => {
   test('should return empty array for missing search input', async () => {
     await expect(fetchPackages()).resolves.toEqual([]);
+    await expect(fetchFrom).toHaveBeenCalledTimes(0);
   });
 
   test('should return empty array for empty search input', async () => {
     await expect(fetchPackages('')).resolves.toEqual([]);
+    await expect(fetchFrom).toHaveBeenCalledTimes(0);
   });
 
   test('should return empty array for invalid data', async () => {
