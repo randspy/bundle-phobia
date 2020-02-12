@@ -18,6 +18,7 @@ export default function SelectPackage(props) {
         }))}
         onChange={value => props.onSelect(value.item)}
         onInputChange={onInputChanged}
+        autoFocus={true}
       />
     </div>
   );

@@ -5,6 +5,7 @@ exports[`SelectPackage should render correctly 1`] = `
   className="select"
 >
   <StateManager
+    autoFocus={true}
     defaultInputValue=""
     defaultMenuIsOpen={false}
     defaultValue={null}
