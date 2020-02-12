@@ -31,9 +31,19 @@ describe('SelectPackage', () => {
     };
     const onChangeSpy = jest.spyOn(props, 'onChange');
     const wrapper = shallow(<SelectPackage {...props} />);
-    wrapper.find(ReactSelect).prop('onInputChange')('r');
-    wrapper.find(ReactSelect).prop('onInputChange')('re');
-    wrapper.find(ReactSelect).prop('onInputChange')('rea');
+    wrapper.find(ReactSelect).prop('onInputChange')('r', {
+      action: 'input-change'
+    });
+    wrapper.find(ReactSelect).prop('onInputChange')('re', {
+      action: 'input-change'
+    });
+    wrapper.find(ReactSelect).prop('onInputChange')('rea', {
+      action: 'input-change'
+    });
+
+    wrapper.find(ReactSelect).prop('onInputChange')('', {
+      action: 'not-input-change'
+    });
 
     expect(onChangeSpy).toHaveBeenCalledWith('r');
     expect(onChangeSpy).toHaveBeenCalledWith('re');

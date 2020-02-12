@@ -2,6 +2,12 @@ import React from 'react';
 import ReactSelect from 'react-select';
 
 export default function SelectPackage(props) {
+  function onInputChanged(value, { action }) {
+    if (action === 'input-change') {
+      props.onChange(value);
+    }
+  }
+
   return (
     <div className="select">
       <ReactSelect
@@ -11,7 +17,7 @@ export default function SelectPackage(props) {
           item: item
         }))}
         onChange={value => props.onSelect(value.item)}
-        onInputChange={value => props.onChange(value)}
+        onInputChange={onInputChanged}
       />
     </div>
   );
