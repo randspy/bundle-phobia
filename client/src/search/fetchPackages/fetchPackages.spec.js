@@ -1,14 +1,14 @@
-import axios from 'axios';
 import fetchPackages from './fetchPackages';
+import fetchFrom from '../../shared/fetch-from';
 import PackageBom from '../package-bom/package-bom';
 
-jest.mock('axios');
+jest.mock('../../shared/fetch-from');
 
 afterEach(() => {
-  axios.get.mockReset();
+  fetchFrom.mockReset();
 });
 
-describe('FetchPackages', () => {
+describe('fetchPackages', () => {
   test('should return empty array for missing search input', async () => {
     await expect(fetchPackages()).resolves.toEqual([]);
   });
@@ -17,32 +17,24 @@ describe('FetchPackages', () => {
     await expect(fetchPackages('')).resolves.toEqual([]);
   });
 
-  test('should return empty array for missing data', async () => {
-    axios.get.mockResolvedValue({});
-
-    await expect(fetchPackages('react')).resolves.toEqual([]);
-  });
-
   test('should return empty array for invalid data', async () => {
-    axios.get.mockResolvedValue({ data: {} });
+    fetchFrom.mockResolvedValue({});
 
     await expect(fetchPackages('react')).resolves.toEqual([]);
   });
 
   test('should return package for a package name', async () => {
     const response = new PackageBom({ package: { name: 'React' } });
-    axios.get.mockResolvedValue({
-      data: [
-        {
-          package: { name: 'React' }
-        }
-      ]
-    });
+    fetchFrom.mockResolvedValue([
+      {
+        package: { name: 'React' }
+      }
+    ]);
 
     await expect(fetchPackages('react')).resolves.toEqual([response]);
 
-    expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toHaveBeenCalledWith(
+    expect(fetchFrom).toHaveBeenCalledTimes(1);
+    expect(fetchFrom).toHaveBeenCalledWith(
       'https://api.npms.io/v2/search/suggestions?q=react'
     );
   });
@@ -50,18 +42,6 @@ describe('FetchPackages', () => {
   test('should not call api when name has one character', async () => {
     await expect(fetchPackages('r')).resolves.toEqual([]);
 
-    expect(axios.get).toHaveBeenCalledTimes(0);
-  });
-
-  test('should return empty array on thrown error from the api', async () => {
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
-    axios.get.mockRejectedValue(new Error('Api error'));
-
-    await expect(fetchPackages('react')).resolves.toEqual([]);
-
-    expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(consoleSpy).toHaveBeenCalledTimes(1);
-
-    consoleSpy.mockRestore();
+    expect(fetchFrom).toHaveBeenCalledTimes(0);
   });
 });
