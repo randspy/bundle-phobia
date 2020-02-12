@@ -1,15 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
+// it needs some tests if there is time, not all all the cases covered
 function generateVersion(version, howMuchLess) {
   var multiplier = 100;
   var tokens = version.split('.');
   var firstTwoSegmentsOfVersion = tokens[0] + '.' + tokens[1];
-  return (
+  var olderVersion =
     (+firstTwoSegmentsOfVersion * multiplier - +howMuchLess * multiplier) /
-      multiplier +
-    '.0'
-  );
+    multiplier;
+  return olderVersion.toFixed(2) + '.0';
 }
 
 /* GET users listing. */
