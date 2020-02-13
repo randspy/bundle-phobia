@@ -25,6 +25,9 @@ exports[`Result should render correctly 1`] = `
       gzip={0}
       minified={0}
     />
+    <Graph
+      bundles={Array []}
+    />
   </div>
 </div>
 `;

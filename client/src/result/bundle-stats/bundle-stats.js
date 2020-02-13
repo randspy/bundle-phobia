@@ -1,10 +1,8 @@
 import React from 'react';
+import toKB from '../services/to-kb/to-kb';
 import './bundle-stats.css';
 
 export default function BundleStats(props) {
-  function toKB(number) {
-    return Math.round((number / 1024) * 10) / 10;
-  }
   return (
     <div className="bundle-stats">
       <div className="bundle-stats--label bundle-stats--center">

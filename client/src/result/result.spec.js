@@ -5,14 +5,14 @@ import JestMockPromise from 'jest-mock-promise';
 import Result from './result';
 import BundleStats from './bundle-stats/bundle-stats';
 import { BrowserRouter as Router } from 'react-router-dom';
-import fetchBundles from './fetch-bundles/fetch-bundles';
-import useQuery from './use-query/use-query';
+import fetchBundles from './services/fetch-bundles/fetch-bundles';
+import useQuery from './services/use-query/use-query';
 
-jest.mock('./use-query/use-query');
-jest.mock('./fetch-bundles/fetch-bundles');
+jest.mock('./services/use-query/use-query');
+jest.mock('./services/fetch-bundles/fetch-bundles');
 
 describe('Result', () => {
-  test.skip('should wire component', () => {
+  test('should wire component', () => {
     const wrapper = shallow(<Result />);
     expect(wrapper.exists()).toBe(true);
   });

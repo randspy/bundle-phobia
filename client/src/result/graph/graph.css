@@ -1,0 +1,49 @@
+.graph {
+  rotate: 270deg;
+  font-size: 12px;
+}
+
+.graph-bundle {
+  margin: 10px 0;
+  display: flex;
+}
+
+.graph-version {
+  min-width: 100px;
+  margin-right: 10px;
+}
+
+.graph-version-text {
+  float: right;
+}
+
+.graph-col {
+  width: 200px;
+  position: relative;
+}
+
+.graph-minified {
+  background-color: #65c3f8;
+}
+
+.graph-gzip {
+  background-color: #65a1f8;
+  z-index: 1;
+}
+
+.graph-minified,
+.graph-gzip {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 80%;
+}
+
+.tippy-tooltip-content {
+  color: white;
+  background: black;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  opacity: 0.8 !important;
+}
