@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Result should render correctly 1`] = `
+<div
+  className="result"
+>
+  <Link
+    to="/"
+  >
+    <div
+      className="result--back-button"
+    >
+      BUNDLE
+      <div
+        className="result--secondary-back-button"
+      >
+        PHOBIA
+      </div>
+    </div>
+  </Link>
+  <div
+    className="result--content"
+  >
+    <BundleStats
+      gzip={0}
+      minified={0}
+    />
+  </div>
+</div>
+`;

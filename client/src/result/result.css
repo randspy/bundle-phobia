@@ -1,0 +1,24 @@
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 50vh;
+}
+
+.result > a {
+  text-decoration: none;
+}
+
+.result--back-button {
+  font-size: 20px;
+  display: flex;
+}
+
+.result--secondary-back-button {
+  color: var(--secondary-color);
+}
+
+.result--content {
+  display: flex;
+  justify-content: center;
+}
