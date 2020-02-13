@@ -1,10 +1,14 @@
 :root {
   --primary-color: black;
   --secondary-color: grey;
+  --primary-reverse-color: white;
+
+  --primary-font: 'Roboto', sans-serif;
+  --secondary-font: 'Source Code Pro', monospace;
 }
 
 * {
   color: var(--primary-color);
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--primary-font);
   letter-spacing: 2px;
 }

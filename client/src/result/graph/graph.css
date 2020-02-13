@@ -40,8 +40,8 @@
 }
 
 .tippy-tooltip-content {
-  color: white;
-  background: black;
+  color: var(--primary-reverse-color);
+  background: var(--primary-color);
   padding: 5px;
   border-radius: 5px;
   font-size: 12px;

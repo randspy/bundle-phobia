@@ -17,7 +17,6 @@ module.exports = {
           plugins: ['@babel/plugin-transform-runtime']
         }
       },
-      // New rules to load css
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']

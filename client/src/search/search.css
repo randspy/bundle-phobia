@@ -16,7 +16,7 @@
 }
 
 .search--subtitle {
-  font-family: 'Source Code Pro', monospace;
+  font-family: var(--secondary-font);
 }
 .search--subtitle,
 .search--title {
