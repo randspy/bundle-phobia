@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BundlePhobia should render correctly 1`] = `
+<div>
+  <Switch>
+    <Route
+      exact={true}
+      path="/"
+    >
+      <Search />
+    </Route>
+    <Route
+      path="/result"
+    >
+      <Result />
+    </Route>
+  </Switch>
+</div>
+`;
