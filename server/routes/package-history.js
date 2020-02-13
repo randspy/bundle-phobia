@@ -1,15 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
-// it needs some tests if there is time, not all all the cases covered
-function generateVersion(version, howMuchLess) {
-  var multiplier = 100;
+function getRandomNumber(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+function format(major, minor) {
+  return major + '.' + minor + '.0';
+}
+function minorVersion(version) {
   var tokens = version.split('.');
-  var firstTwoSegmentsOfVersion = tokens[0] + '.' + tokens[1];
-  var olderVersion =
-    (+firstTwoSegmentsOfVersion * multiplier - +howMuchLess * multiplier) /
-    multiplier;
-  return olderVersion.toFixed(2) + '.0';
+  return format(tokens[0], getRandomNumber(+tokens[1]));
+}
+
+function majorVersion(version) {
+  var tokens = version.split('.');
+  return format(getRandomNumber(+tokens[0]), tokens[1]);
 }
 
 /* GET users listing. */
@@ -25,40 +31,41 @@ router.get('/', function(req, res, next) {
     gzip: 63420
   };
 
-  response[generateVersion(version, '0.1')] = {
+  response[minorVersion(version)] = {
     name: name,
     size: 181797,
     minified: 120333,
     gzip: 61420
   };
 
-  response[generateVersion(version, '0.2')] = {
+  response[minorVersion(version)] = {
     name: name,
     size: 177797,
     minified: 112333,
     gzip: 59420
   };
 
-  response[generateVersion(version, '0.3')] = {
+  response[minorVersion(version)] = {
     name: name,
     size: 163797,
     minified: 102333,
     gzip: 53420
   };
 
-  response[generateVersion(version, '0.4')] = {
+  response[minorVersion(version)] = {
     name: name,
     size: 133797,
     minified: 72333,
     gzip: 43420
   };
 
-  response[generateVersion(version, '1')] = {
-    name: name,
-    size: 123797,
-    minified: 62333,
-    gzip: 37420
-  };
+  if (+version.split('.')[0] > 0)
+    response[majorVersion(version)] = {
+      name: name,
+      size: 123797,
+      minified: 62333,
+      gzip: 37420
+    };
 
   res.send(response);
 });
