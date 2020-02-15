@@ -47,40 +47,6 @@ describe('fromApi', () => {
     ]);
   });
 
-  test('should limit to 3 minor and 1 major version', () => {
-    expect(
-      fromApi({
-        '16.12.0': {
-          name: 'react'
-        },
-        '16.5.0': {
-          name: 'react'
-        },
-        '16.7.0': {
-          name: 'react'
-        },
-        '16.8.0': {
-          name: 'react'
-        },
-        '16.1.0': {
-          name: 'react'
-        },
-        '13.12.0': {
-          name: 'react'
-        },
-        '11.12.0': {
-          name: 'react'
-        }
-      })
-    ).toEqual([
-      { name: 'react', version: '13.12.0' },
-      { name: 'react', version: '16.5.0' },
-      { name: 'react', version: '16.7.0' },
-      { name: 'react', version: '16.8.0' },
-      { name: 'react', version: '16.12.0' }
-    ]);
-  });
-
   describe('addPercentageOffMaxSize', () => {
     test('should add percentage of max size', () => {
       expect(
