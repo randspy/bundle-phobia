@@ -1,6 +1,5 @@
 import fetchPackages from './fetchPackages';
 import fetchFrom from '../../shared/fetch-from/fetch-from';
-import PackageBom from '../package-bom/package-bom';
 
 jest.mock('../../shared/fetch-from/fetch-from');
 
@@ -19,17 +18,11 @@ describe('fetchPackages', () => {
     await expect(fetchFrom).toHaveBeenCalledTimes(0);
   });
 
-  test('should return empty array for invalid data', async () => {
-    fetchFrom.mockResolvedValue({});
-
-    await expect(fetchPackages('react')).resolves.toEqual([]);
-  });
-
   test('should return package for a package name', async () => {
-    const response = new PackageBom({ package: { name: 'React' } });
+    const response = { name: 'React', version: '16.2.1' };
     fetchFrom.mockResolvedValue([
       {
-        package: { name: 'React' }
+        package: response
       }
     ]);
 

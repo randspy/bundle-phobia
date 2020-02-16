@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom';
 import Search from './search';
 import Loader from '../loader/loader';
 import SelectPackage from './select-package/select-package';
-import PackageBom from './package-bom/package-bom';
 import fetchPackages from './fetchPackages/fetchPackages';
 import BundleStore from '../store/bundle.store';
 
@@ -38,15 +37,14 @@ describe('Search', () => {
   });
 
   test('should set options drop down list based on input', done => {
-    const dataFromOnChange = { name: 'react' };
-    const returnData = new PackageBom({ package: dataFromOnChange });
-    const mockedFunction = fetchPackages.mockResolvedValue(returnData);
+    const options = { name: 'react' };
+    const mockedFunction = fetchPackages.mockResolvedValue([options]);
     const wrapper = shallow(<Search />);
-    wrapper.find(SelectPackage).prop('onChange')(dataFromOnChange);
+    wrapper.find(SelectPackage).prop('onChange')(options);
 
     setTimeout(() => {
-      expect(wrapper.find(SelectPackage).props().options).toEqual(returnData);
-      expect(mockedFunction).toHaveBeenCalledWith(dataFromOnChange);
+      expect(wrapper.find(SelectPackage).props().options).toEqual([options]);
+      expect(mockedFunction).toHaveBeenCalledWith(options);
       done();
     });
   });
@@ -61,9 +59,9 @@ describe('Search', () => {
       return false;
     });
 
-    const dataFromOnChange = { name: 'react', version: '16.2.1' };
+    const options = { name: 'react', version: '16.2.1' };
     const wrapper = shallow(<Search />);
-    wrapper.find(SelectPackage).prop('onSelect')(dataFromOnChange);
+    wrapper.find(SelectPackage).prop('onSelect')(options);
 
     expect(setter).toHaveBeenCalledWith('packageName');
     expect(setterReturn).toHaveBeenCalledWith('react');
