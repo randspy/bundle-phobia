@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader should render correctly 1`] = `
+<div
+  className="loader"
+>
+  <Loader
+    className=""
+    color="black"
+    height={40}
+    style={Object {}}
+    timeout={0}
+    type="Grid"
+    visible={true}
+    width={40}
+  />
+</div>
+`;

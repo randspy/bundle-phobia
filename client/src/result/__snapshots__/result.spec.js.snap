@@ -9,6 +9,7 @@ exports[`Result should render correctly 1`] = `
   >
     <div
       className="result--back-button"
+      onClick={[Function]}
     >
       BUNDLE
       <div

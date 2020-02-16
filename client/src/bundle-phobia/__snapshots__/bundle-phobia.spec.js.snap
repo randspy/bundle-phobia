@@ -2,18 +2,20 @@
 
 exports[`BundlePhobia should render correctly 1`] = `
 <div>
-  <Switch>
-    <Route
-      exact={true}
-      path="/"
-    >
-      <Search />
-    </Route>
-    <Route
-      path="/result"
-    >
-      <Result />
-    </Route>
-  </Switch>
+  <Container>
+    <Switch>
+      <Route
+        exact={true}
+        path="/"
+      >
+        <Search />
+      </Route>
+      <Route
+        path="/result"
+      >
+        <Result />
+      </Route>
+    </Switch>
+  </Container>
 </div>
 `;

@@ -1,43 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import BundleStats from './bundle-stats/bundle-stats';
 import Graph from './graph/graph';
-import fromApi from './services/from-api/from-api';
 import useQuery from './services/use-query/use-query';
-import fetchBundles from './services/fetch-bundles/fetch-bundles';
+import BundleStore from '../store/bundle.store';
+import Loader from '../loader/loader';
 import './result.css';
 
-export default function Result() {
+export default function Result(props) {
+  let store = BundleStore.useStore();
   let query = useQuery();
-  let [bundles, setBundles] = useState([]);
-  let [selectedBundle, setSelectedBundle] = useState({
-    minified: 0,
-    gzip: 0
-  });
 
   useEffect(() => {
-    fetchBundles(query.name, query.version).then(result => {
-      const data = fromApi(result);
-      if (data.length) {
-        setSelectedBundle(data[data.length - 1]);
-        setBundles(data);
-      }
-    });
+    store.set('packageName')(query.name);
   }, []);
+
+  function backButtonHandle() {
+    store.set('bundles')([]);
+  }
+
+  if (store.get('loading')) {
+    return <Loader />;
+  }
 
   return (
     <div className="result">
       <Link to="/">
-        <div className="result--back-button">
+        <div className="result--back-button" onClick={backButtonHandle}>
           BUNDLE<div className="result--secondary-back-button">PHOBIA</div>
         </div>
       </Link>
       <div className="result--content">
         <BundleStats
-          minified={selectedBundle.minified}
-          gzip={selectedBundle.gzip}
+          minified={store.get('bundleStats').minified}
+          gzip={store.get('bundleStats').gzip}
         />
-        <Graph bundles={bundles} />
+        <Graph bundles={store.get('bundles')} />
       </div>
     </div>
   );

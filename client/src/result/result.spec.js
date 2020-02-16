@@ -1,15 +1,41 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
-import JestMockPromise from 'jest-mock-promise';
 import Result from './result';
 import BundleStats from './bundle-stats/bundle-stats';
+import Graph from './graph/graph';
+import Loader from '../loader/loader';
 import { BrowserRouter as Router } from 'react-router-dom';
-import fetchBundles from './services/fetch-bundles/fetch-bundles';
 import useQuery from './services/use-query/use-query';
+import BundleStore from '../store/bundle.store';
 
 jest.mock('./services/use-query/use-query');
 jest.mock('./services/fetch-bundles/fetch-bundles');
+jest.mock('../store/bundle.store');
+
+let setter = null;
+let getter = null;
+
+beforeEach(() => {
+  getter = jest.fn(value => {
+    if (value === 'bundleStats') {
+      return { minified: 0, gzip: 0 };
+    }
+    if (value === 'bundles') {
+      return [];
+    }
+    return false;
+  });
+
+  setter = jest.fn();
+
+  BundleStore.useStore.mockImplementation(() => {
+    return {
+      get: getter,
+      set: setter
+    };
+  });
+});
 
 describe('Result', () => {
   test('should wire component', () => {
@@ -17,29 +43,41 @@ describe('Result', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  test('should contain BundleStats with default values', () => {
+  test('should get bundle data', () => {
+    getter.mockImplementation(value => {
+      if (value === 'bundleStats') {
+        return { minified: 34, gzip: 22 };
+      }
+      if (value === 'bundles') {
+        return [{}];
+      }
+      return false;
+    });
     const wrapper = shallow(<Result />);
     expect(
-      wrapper.containsMatchingElement(<BundleStats minified={0} gzip={0} />)
+      wrapper.containsMatchingElement(<BundleStats minified={34} gzip={22} />)
     ).toEqual(true);
+    expect(wrapper.containsMatchingElement(<Graph bundles={[{}]} />)).toEqual(
+      true
+    );
   });
 
-  test('should display fetched bundles', () => {
+  test('should set package name from the query', () => {
     useQuery.mockReturnValue({
-      name: 'react',
-      version: '16.3.3'
+      name: 'react'
+    });
+    let setterReturn = jest.fn(() => {});
+    setter.mockImplementation(() => setterReturn);
+    getter.mockImplementation(value => {
+      if (value === 'bundleStats') {
+        return { minified: 0, gzip: 0 };
+      }
+      if (value === 'bundles') {
+        return [];
+      }
+      return false;
     });
 
-    fetchBundles.mockReturnValue(
-      new JestMockPromise(resolve => {
-        resolve({
-          '16.1.1': {
-            minified: 2048,
-            gzip: 1024
-          }
-        });
-      })
-    );
     let wrapper = null;
     act(() => {
       wrapper = mount(
@@ -49,36 +87,35 @@ describe('Result', () => {
       );
     });
 
-    wrapper.update();
-    expect(wrapper.find('.bundle-stats--minified').text()).toEqual('2kB');
-    expect(wrapper.find('.bundle-stats--gzip').text()).toEqual('1kB');
-    expect(fetchBundles).toHaveBeenCalledWith('react', '16.3.3');
+    expect(setter).toHaveBeenCalledWith('packageName');
+    expect(setterReturn).toHaveBeenCalledWith('react');
+
+    expect(setter).toHaveBeenCalledTimes(1);
+    expect(setterReturn).toHaveBeenCalledTimes(1);
   });
 
-  test('should do nothing for empty bundle object', () => {
-    useQuery.mockReturnValue({
-      name: 'react',
-      version: '16.3.3'
-    });
+  test('should clean bundles', () => {
+    let setterReturn = jest.fn(() => {});
+    setter.mockImplementation(() => setterReturn);
 
-    fetchBundles.mockReturnValue(
-      new JestMockPromise(resolve => {
-        resolve({});
-      })
-    );
-    let wrapper = null;
-    act(() => {
-      wrapper = mount(
-        <Router>
-          <Result />
-        </Router>
-      );
-    });
-
+    const wrapper = shallow(<Result />);
+    wrapper.find('.result--back-button').simulate('click');
     wrapper.update();
-    expect(wrapper.find('.bundle-stats--minified').text()).toEqual('0kB');
-    expect(wrapper.find('.bundle-stats--gzip').text()).toEqual('0kB');
-    expect(fetchBundles).toHaveBeenCalledWith('react', '16.3.3');
+
+    expect(setter).toHaveBeenCalledWith('bundles');
+    expect(setterReturn).toHaveBeenCalledWith([]);
+
+    expect(setter).toHaveBeenCalledTimes(1);
+    expect(setterReturn).toHaveBeenCalledTimes(1);
+  });
+
+  test('should be in the loading state', () => {
+    getter.mockImplementation(value => {
+      return true;
+    });
+
+    const wrapper = shallow(<Result />);
+    expect(wrapper.find(Loader)).toHaveLength(1);
   });
 
   it('should render correctly', () => {

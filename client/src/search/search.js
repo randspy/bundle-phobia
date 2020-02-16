@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import Loader from '../loader/loader';
 import SelectPackage from './select-package/select-package';
 import fetchPackages from './fetchPackages/fetchPackages';
+import BundleStore from '../store/bundle.store';
 import './search.css';
 
 export default function Search() {
+  let store = BundleStore.useStore();
   const [options, setOptions] = useState([]);
-  const [query, setQuery] = useState(null);
 
   function onSelectChanged(value) {
-    setQuery(value);
+    store.set('packageName')(value.name);
   }
 
   function onChanged(value) {
@@ -18,8 +20,12 @@ export default function Search() {
     });
   }
 
-  if (query) {
-    return redirectToResultPage(query);
+  if (store.get('bundles').length) {
+    return redirectToResultPage(store.get('packageName'));
+  }
+
+  if (store.get('loading')) {
+    return <Loader />;
   }
 
   return (
@@ -43,7 +49,7 @@ export default function Search() {
   );
 }
 
-function redirectToResultPage(query) {
-  const url = `/result?name=${query.name}&version=${query.version}`;
+function redirectToResultPage(packageName) {
+  const url = `/result?name=${packageName}`;
   return <Redirect to={url} />;
 }

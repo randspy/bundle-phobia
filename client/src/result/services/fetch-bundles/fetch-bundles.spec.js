@@ -18,15 +18,10 @@ describe('fetchBundles', () => {
     await expect(fetchFrom).toHaveBeenCalledTimes(0);
   });
 
-  test('should return empty object for empty version', async () => {
-    await expect(fetchBundles('react', '')).resolves.toEqual({});
-    await expect(fetchFrom).toHaveBeenCalledTimes(0);
-  });
-
   test('should return empty object for invalid data', async () => {
     fetchFrom.mockResolvedValue(null);
 
-    await expect(fetchBundles('react', '1.1.0')).resolves.toEqual({});
+    await expect(fetchBundles('react')).resolves.toEqual({});
     await expect(fetchFrom).toHaveBeenCalledTimes(1);
   });
 
@@ -37,11 +32,11 @@ describe('fetchBundles', () => {
 
     fetchFrom.mockResolvedValue(response);
 
-    await expect(fetchBundles('react', '1.1.2')).resolves.toEqual(response);
+    await expect(fetchBundles('react')).resolves.toEqual(response);
 
     expect(fetchFrom).toHaveBeenCalledTimes(1);
     expect(fetchFrom).toHaveBeenCalledWith(
-      'http://localhost:5000/package-history?name=react&version=1.1.2'
+      'http://localhost:5000/package-history?name=react'
     );
   });
 });
