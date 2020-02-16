@@ -10,7 +10,6 @@ import useQuery from './services/use-query/use-query';
 import BundleStore from '../store/bundle.store';
 
 jest.mock('./services/use-query/use-query');
-jest.mock('./services/fetch-bundles/fetch-bundles');
 jest.mock('../store/bundle.store');
 
 let setter = null;

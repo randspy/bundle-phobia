@@ -1,8 +1,8 @@
 import fetchPackages from './fetchPackages';
-import fetchFrom from '../../shared/fetch-from';
+import fetchFrom from '../../shared/fetch-from/fetch-from';
 import PackageBom from '../package-bom/package-bom';
 
-jest.mock('../../shared/fetch-from');
+jest.mock('../../shared/fetch-from/fetch-from');
 
 afterEach(() => {
   fetchFrom.mockReset();

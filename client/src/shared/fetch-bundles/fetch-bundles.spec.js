@@ -1,7 +1,7 @@
-import fetchFrom from './../../../shared/fetch-from';
+import fetchFrom from '../fetch-from/fetch-from';
 import fetchBundles from './fetch-bundles';
 
-jest.mock('./../../../shared/fetch-from');
+jest.mock('../fetch-from/fetch-from');
 
 afterEach(() => {
   fetchFrom.mockReset();

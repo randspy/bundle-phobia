@@ -1,4 +1,4 @@
-import fetchFrom from '../../../shared/fetch-from';
+import fetchFrom from '../fetch-from/fetch-from';
 
 export default async function fetchBundles(name) {
   if (name) {

@@ -1,4 +1,4 @@
-import fetchFrom from '../../shared/fetch-from';
+import fetchFrom from '../../shared/fetch-from/fetch-from';
 import PackageBom from '../package-bom/package-bom';
 
 export default async function fetchPackages(value) {

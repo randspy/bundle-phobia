@@ -1,8 +1,8 @@
 import { of } from 'rxjs';
-import fetchBundles from '../result/services/fetch-bundles/fetch-bundles';
+import fetchBundles from '../shared/fetch-bundles/fetch-bundles';
 import { withEffects } from './bundle.effects';
 
-jest.mock('../result/services/fetch-bundles/fetch-bundles');
+jest.mock('../shared/fetch-bundles/fetch-bundles');
 
 let store;
 let setter;

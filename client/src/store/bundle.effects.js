@@ -1,5 +1,5 @@
-import fetchBundles from '../result/services/fetch-bundles/fetch-bundles';
-import fromApi from '../result/services/from-api/from-api';
+import fetchBundles from '../shared/fetch-bundles/fetch-bundles';
+import fromApi from '../shared/from-api/from-api';
 
 export function withEffects(store) {
   store.on('packageName').subscribe(packageName => {
