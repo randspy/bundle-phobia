@@ -30,21 +30,26 @@ export default function Search() {
 
   return (
     <div className="search">
-      <div>
-        <div className="search--title">
-          BUNDLE<div className="search--secondary-title">PHOBIA</div>
-        </div>
-        <div className="search--subtitle">
-          find the cost of adding a npm package to your bundle
-        </div>
-        <div>
-          <SelectPackage
-            options={options}
-            onSelect={onSelectChanged}
-            onChange={onChanged}
-          />
-        </div>
+      <div className="search--title">
+        BUNDLE<div className="search--secondary-title">PHOBIA</div>
       </div>
+      <div className="search--subtitle">
+        find the cost of adding a npm package to your bundle
+      </div>
+      <div className="search--select-package">
+        <SelectPackage
+          options={options}
+          onSelect={onSelectChanged}
+          onChange={onChanged}
+        />
+      </div>
+      {store.get('error') ? (
+        <div className="search--error">
+          Internal server error. Could not process specified package.
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

@@ -5,7 +5,7 @@ import Result from './result';
 import BundleStats from './bundle-stats/bundle-stats';
 import Graph from './graph/graph';
 import Loader from '../loader/loader';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 import useQuery from './services/use-query/use-query';
 import BundleStore from '../store/bundle.store';
 
@@ -115,6 +115,19 @@ describe('Result', () => {
 
     const wrapper = shallow(<Result />);
     expect(wrapper.find(Loader)).toHaveLength(1);
+  });
+
+  test('should redirect to home page for error', () => {
+    getter.mockImplementation(value => {
+      if (value === 'error') {
+        return true;
+      }
+
+      return false;
+    });
+
+    const wrapper = shallow(<Result />);
+    expect(wrapper.find(Redirect)).toHaveLength(1);
   });
 
   it('should render correctly', () => {

@@ -4,29 +4,29 @@ exports[`Search should render correctly 1`] = `
 <div
   className="search"
 >
-  <div>
+  <div
+    className="search--title"
+  >
+    BUNDLE
     <div
-      className="search--title"
+      className="search--secondary-title"
     >
-      BUNDLE
-      <div
-        className="search--secondary-title"
-      >
-        PHOBIA
-      </div>
+      PHOBIA
     </div>
-    <div
-      className="search--subtitle"
-    >
-      find the cost of adding a npm package to your bundle
-    </div>
-    <div>
-      <SelectPackage
-        onChange={[Function]}
-        onSelect={[Function]}
-        options={Array []}
-      />
-    </div>
+  </div>
+  <div
+    className="search--subtitle"
+  >
+    find the cost of adding a npm package to your bundle
+  </div>
+  <div
+    className="search--select-package"
+  >
+    <SelectPackage
+      onChange={[Function]}
+      onSelect={[Function]}
+      options={Array []}
+    />
   </div>
 </div>
 `;

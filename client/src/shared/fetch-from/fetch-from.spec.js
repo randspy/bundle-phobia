@@ -8,14 +8,12 @@ afterEach(() => {
 });
 
 describe('fetchFrom', () => {
-  test('should return null for invalid input', async () => {
+  test('should rethrow for invalid input', async () => {
     axios.get.mockRejectedValue(new Error('Api error'));
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation();
 
-    await expect(fetchFrom('invalid input')).resolves.toEqual(null);
+    await expect(fetchFrom('invalid input')).rejects.toThrow('Api error');
     expect(axios.get).toHaveBeenCalledWith('invalid input');
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(consoleSpy).toHaveBeenCalledTimes(1);
   });
 
   test('should return data for a valid input', async () => {

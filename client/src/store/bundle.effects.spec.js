@@ -51,16 +51,24 @@ describe('withEffects', () => {
 
     expect(store.get).toHaveBeenCalledWith('bundles');
     expect(fetchBundles).toHaveBeenCalledTimes(1);
+
     expect(store.set).toHaveBeenNthCalledWith(1, 'loading');
-    expect(store.set).toHaveBeenNthCalledWith(2, 'bundles');
-    expect(store.set).toHaveBeenNthCalledWith(3, 'bundleStats');
-    expect(store.set).toHaveBeenNthCalledWith(4, 'loading');
-    expect(store.set).toHaveBeenCalledTimes(4);
     expect(setter).toHaveBeenNthCalledWith(1, true);
+
+    expect(store.set).toHaveBeenNthCalledWith(2, 'bundles');
     expect(setter).toHaveBeenNthCalledWith(2, [result]);
+
+    expect(store.set).toHaveBeenNthCalledWith(3, 'bundleStats');
     expect(setter).toHaveBeenNthCalledWith(3, result);
+
+    expect(store.set).toHaveBeenNthCalledWith(4, 'error');
     expect(setter).toHaveBeenNthCalledWith(4, false);
-    expect(setter).toHaveBeenCalledTimes(4);
+
+    expect(store.set).toHaveBeenNthCalledWith(5, 'loading');
+    expect(setter).toHaveBeenNthCalledWith(5, false);
+
+    expect(store.set).toHaveBeenCalledTimes(5);
+    expect(setter).toHaveBeenCalledTimes(5);
   });
 
   test('should fetch empty bundles', async () => {
@@ -72,8 +80,33 @@ describe('withEffects', () => {
 
     expect(store.get).toHaveBeenCalledWith('bundles');
     expect(fetchBundles).toHaveBeenCalledTimes(1);
+
     expect(store.set).toHaveBeenNthCalledWith(1, 'loading');
-    expect(store.set).toHaveBeenNthCalledWith(2, 'loading');
-    expect(store.set).toHaveBeenCalledTimes(2);
+    expect(setter).toHaveBeenNthCalledWith(1, true);
+
+    expect(store.set).toHaveBeenNthCalledWith(2, 'error');
+    expect(setter).toHaveBeenNthCalledWith(2, true);
+
+    expect(store.set).toHaveBeenNthCalledWith(3, 'loading');
+    expect(setter).toHaveBeenNthCalledWith(3, false);
+
+    expect(store.set).toHaveBeenCalledTimes(3);
+  });
+
+  test('should set error', async () => {
+    store.get.mockReturnValueOnce([]);
+    fetchBundles.mockRejectedValue({});
+
+    withEffects(store);
+    await flushPromises();
+
+    expect(store.set).toHaveBeenCalledWith('error');
+    expect(setter).toHaveBeenCalledWith(true);
+
+    expect(store.set).toHaveBeenCalledWith('loading');
+    expect(setter).toHaveBeenCalledWith(false);
+
+    expect(store.set).toHaveBeenCalledWith('bundles');
+    expect(setter).toHaveBeenCalledWith([]);
   });
 });

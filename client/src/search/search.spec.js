@@ -100,6 +100,24 @@ describe('Search', () => {
     expect(wrapper.find(Loader)).toHaveLength(1);
   });
 
+  test('should display error message', () => {
+    getter.mockImplementation(value => {
+      if (value === 'error') {
+        return true;
+      }
+      if (value === 'loading') {
+        return false;
+      }
+
+      return [];
+    });
+
+    const wrapper = shallow(<Search />);
+    expect(wrapper.find('.search--error').text()).toEqual(
+      'Internal server error. Could not process specified package.'
+    );
+  });
+
   test('should render correctly', () => {
     const wrapper = shallow(<Search />);
     expect(wrapper).toMatchSnapshot();

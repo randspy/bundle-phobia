@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import BundleStats from './bundle-stats/bundle-stats';
 import Graph from './graph/graph';
 import useQuery from './services/use-query/use-query';
@@ -21,6 +21,10 @@ export default function Result(props) {
 
   if (store.get('loading')) {
     return <Loader />;
+  }
+
+  if (store.get('error')) {
+    return <Redirect to="/" />;
   }
 
   return (
