@@ -1,0 +1,13 @@
+<div id="select-bundle">
+  <p>BUNDLEPHOBIA</p>
+  <p>find the cost of adding a npm package to your bundle</p>
+  <mat-autocomplete
+    #autocomplete="matAutocomplete"
+    (optionSelected)="optionSelected($event.option)"
+  >
+    <mat-option *ngFor="let option of options | async" [value]="option">
+      {{ option.name }}
+    </mat-option>
+  </mat-autocomplete>
+  <input [matAutocomplete]="autocomplete" />
+</div>
